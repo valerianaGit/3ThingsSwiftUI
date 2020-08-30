@@ -47,6 +47,7 @@ struct CardView: View {
             TextField("What did you love today", text: $inputText1)
             TextField("What did you fear today", text: $inputText2)
             TextField("What did you desire today", text: $inputText3)
+            //find how to make these cards viewer and user friendly 
         }
     }
 }
