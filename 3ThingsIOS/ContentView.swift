@@ -57,3 +57,57 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+struct LocationRow: View {
+    private let viewModel: LocationRowViewModel
+
+   init(viewModel: LocationRowViewModel) {
+        self.viewModel = viewModel
+    }
+
+    var body: some View {
+        VStack {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(viewModel.name)
+                        .modifier(SecondaryLabel())
+                    Text(viewModel.id)
+                        .modifier(PrimaryLabel())
+                }
+                .layoutPriority(100)
+                Spacer()
+            }
+            .padding()
+        }
+        .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.init(Colors.location_row_stroke_color), lineWidth: 1)
+        )
+            .padding([.top, .horizontal])
+    }
+}
+
+struct LocationRow_Previews: PreviewProvider {
+    static var previews: some View {
+        LocationRow(viewModel: LocationRowViewModel(name: "Chicago"))
+    }
+}
+
+struct SecondaryLabel: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.headline)
+            .foregroundColor(.secondary)
+
+    }
+}
+
+struct PrimaryLabel: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.title)
+            .foregroundColor(.primary)
+            .lineLimit(3)
+    }
+}
